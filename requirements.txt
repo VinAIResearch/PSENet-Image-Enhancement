@@ -1,0 +1,5 @@
+pytorch-lightning
+piq
+kornia
+opencv-python
+jsonargparse[signatures]
