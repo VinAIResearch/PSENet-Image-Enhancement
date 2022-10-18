@@ -90,6 +90,7 @@ python main.py --config configs/afifi.yaml
 ```
 For custom config, please check the comment in `source/configs/sice.yaml`
 ### Testing
+Our pretrained models are provided in folder `pretrained`. To reproduce the quantitative results reported in the main paper, please run the following commands.
 1. SICE dataset
 ```bash
 cd source
