@@ -27,16 +27,22 @@ conda create -n psenet python=3.7
 conda activate psenet
 pip install -r requirements.txt
 ```
+## Demo
+For a quick demo, please run the following command
+```bash
+cd source
+python demo.py 
+```
 ## Training and evaluation
 ### Data Preparation
-Please refer to below links for downloading dataset.
+Please refer to the below links for downloading datasets.
 1. SICE dataset
 - [training set](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view): the customed version of SICE part 1 dataset introduced in ZeroDCE paper. 
-- [testing set](https://drive.google.com/file/d/16VoHNPAZ5Js19zspjFOsKiGRrfkDgHoN/view): SICE part 2 dataset. 
+- [testing set](https://drive.google.com/file/d/16VoHNPAZ5Js19zspjFOsKiGRrfkDgHoN/view): SICE part 2 dataset. Note that the results reported in the main paper are evaluated on resized images with 0.25 of their original size due to memory constraints.
 2. [Afifi dataset](https://github.com/mahmoudnafifi/Exposure_Correction#dataset)
-3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/)
+3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/): 
 
-Unzip all downloaded dataset to match with following data structure
+Unzip all downloaded datasets to data_root folder to match with the following data structure.
 ```
 PSENet-Image-Enhancement
 ├─ assets
@@ -82,23 +88,22 @@ python main.py --config configs/sice.yaml
 cd source
 python main.py --config configs/afifi.yaml
 ```
+For custom config, please check the comment in `source/configs/sice.yaml`
 ### Testing
 1. SICE dataset
 ```bash
 cd source
-python main.py --config configs/sice.yaml --pipeline test --checkpoint pretrained/sice.pth 
+python main.py --config configs/sice.yaml --pipeline test --checkpoint ../pretrained/sice.pth 
 ```
 2. Afifi dataset
 ```bash
 cd source
-python main.py --config configs/afifi.yaml --pipeline test --checkpoint pretrained/afifi.pth 
+python main.py --config configs/afifi.yaml --pipeline test --checkpoint ../pretrained/afifi.pth 
 ```
 3. LOL dataset
 ```bash
 cd source
-python main.py --config configs/lol.yaml --pipeline test --checkpoint pretrained/sice.pth 
+python main.py --config configs/lol.yaml --pipeline test --checkpoint ../pretrained/sice.pth 
 ```
 ## Acknowledgements
-The image enhancement model is built upon MobilenetV2
-
-
+The image enhancement model is built upon [MobileNetV3_PyTorch](https://github.com/PengBoXiangShang/MobileNetV3_PyTorch). We thank the authors for providing helpful functions in our work.
