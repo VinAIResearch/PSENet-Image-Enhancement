@@ -40,7 +40,7 @@ Please refer to the below links for downloading datasets.
 - [training set](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view): the customed version of SICE part 1 dataset introduced in ZeroDCE paper. 
 - [testing set](https://drive.google.com/file/d/16VoHNPAZ5Js19zspjFOsKiGRrfkDgHoN/view): SICE part 2 dataset. Note that the results reported in the main paper are evaluated on resized images with 0.25 of their original size due to memory constraints.
 2. [Afifi dataset](https://github.com/mahmoudnafifi/Exposure_Correction#dataset)
-3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/): 
+3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/): Both training and evaluation set are used for evaluation in the main paper.
 
 Unzip all downloaded datasets to data_root folder to match with the following data structure.
 ```
