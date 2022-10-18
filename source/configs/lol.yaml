@@ -10,7 +10,7 @@ trainer:
   num_nodes: 1
   num_processes: null
   devices: null
-  gpus: null
+  gpus: 1
   auto_select_gpus: false
   tpu_cores: null
   ipus: null
@@ -68,5 +68,5 @@ model:
 data:
   class_path: data.LOLDataModule
   init_args:
-    data_root: /home/ubuntu/WACV/PSENet-Image-Enhancement/data_root/lol/our485/
+    data_root: /home/ubuntu/WACV/PSENet-Image-Enhancement/data_root/lol/
     num_workers: 4

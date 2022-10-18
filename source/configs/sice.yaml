@@ -1,16 +1,17 @@
 # pytorch_lightning==1.7.7
 seed_everything: 42
+# pytorch_lightning trainer config. Please refer to pytorch lightning docs for more details.
 trainer:
   logger: true
   enable_checkpointing: true
   callbacks: null
-  default_root_dir: ../workdirs
+  default_root_dir: ../workdirs # root folder of log directory
   gradient_clip_val: null
   gradient_clip_algorithm: null
   num_nodes: 1
   num_processes: null
   devices: null
-  gpus: null
+  gpus: 1
   auto_select_gpus: false
   tpu_cores: null
   ipus: null
@@ -52,22 +53,22 @@ trainer:
   amp_level: null
   move_metrics_to_cpu: false
   multiple_trainloader_mode: max_size_cycle
-pipeline: full
-exp_name: sice
+pipeline: full # whether to run train, evaluation or both of them. Options are full, train or test
+exp_name: sice # config for log directory. The log directory will be {trainer.default_root_dir} / {exp_name} / {version}
 version: null
-checkpoint: null
+checkpoint: null #config for pretrained model
 model:
   class_path: framework.PSENet
   init_args:
-    tv_w: 5
-    gamma_lower: -2
+    tv_w: 5 # weight of total variation loss
+    gamma_lower: -2 # gamma value to generate random reference images will be sampled uniformly between [e^gamma_lower, e^gamma_upper]
     gamma_upper: 3
     number_refs: 1
     lr: 5e-4
-    afifi_evaluation: false
+    afifi_evaluation: false # get metrics for under and overexposed images separately. Only implemented for afifi dataset
 data:
   class_path: data.SICEDataModule
   init_args:
-    data_root: /home/ubuntu/WACV/PSENet-Image-Enhancement/data_root/sice/
+    data_root: /home/ubuntu/WACV/PSENet-Image-Enhancement/data_root/sice/ # root folder of dataset
     train_batch_size: 64
     num_workers: 4

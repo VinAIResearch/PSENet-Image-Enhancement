@@ -80,7 +80,7 @@ class AfifiDataModule(LightningDataModule):
 
         def get_label_fn(path):
             gt_path = path.replace("INPUT_IMAGES", "expert_e_testing_set")
-            gt_path = gt_path.split("-")[0] + "*"
+            gt_path = gt_path[:-9] + "*"
             gt_path = glob.glob(gt_path)[0]
             return gt_path
 
@@ -128,7 +128,7 @@ class LOLDataModule(LightningDataModule):
         def get_label_fn(path):
             return path.replace("low", "high")
 
-        test_data = PairedDataset(data_root, "low/*.*", get_label_fn, resize=None, return_name=True)
+        test_data = PairedDataset(data_root, "*/low/*.*", get_label_fn, resize=None, return_name=True)
         self.test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=num_workers)
 
     def test_dataloader(self):
