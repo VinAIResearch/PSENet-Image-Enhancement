@@ -1,5 +1,5 @@
 # PSENet: Progressive Self-Enhancement Network for Unsupervised Extreme-Light Image Enhancement
-by Hue Nguyen, [Diep Tran](https://www.linkedin.com/in/diep-tran-1407/), [Khoi Nguyen](https://www.khoinguyen.org/), [Rang Nguyen](https://rangnguyen.github.io/)
+by [Hue Nguyen](https://huent189.github.io/), [Diep Tran](https://www.linkedin.com/in/diep-tran-1407/), [Khoi Nguyen](https://www.khoinguyen.org/), [Rang Nguyen](https://rangnguyen.github.io/)
 
 The extremes of lighting (e.g. too much or too little light) usually cause many troubles for machine and human vision. Many recent works have mainly focused on under-exposure cases where images are often captured in low-light conditions (e.g. nighttime) and achieved promising results for enhancing the quality of images. However, they are inferior to handling images under over-exposure. To mitigate this limitation, we propose a novel unsupervised enhancement framework which is robust against various lighting conditions while doesn't require any well-exposed images to serve as the ground-truths. Our main concept is to construct pseudo-ground-truth images synthesized from multiple source images that simulate all potential exposure scenarios to train the enhancement network. Our extensive experiments show that the proposed approach consistently outperforms the current state-of-the-art unsupervised counterparts in several public datasets in terms of both quantitative metrics and qualitative results.
 
@@ -15,6 +15,7 @@ Details of our framework and benchmark results can be found in [our paper](https
 }
 ```
 **Please CITE** our paper when this repository is used to help produce published results or is incorporated into other software.
+
 ## Installation
 1. Clone this repository
 ```bash
@@ -40,7 +41,7 @@ Please refer to the below links for downloading datasets.
 - [training set](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view): the customed version of SICE part 1 dataset introduced in ZeroDCE paper. 
 - [testing set](https://drive.google.com/file/d/16VoHNPAZ5Js19zspjFOsKiGRrfkDgHoN/view): SICE part 2 dataset. Note that the results reported in the main paper are evaluated on resized images with 0.25 of their original size due to memory constraints.
 2. [Afifi dataset](https://github.com/mahmoudnafifi/Exposure_Correction#dataset)
-3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/): Both training and evaluation set are used for evaluation in the main paper.
+3. [LOL dataset (for evaluation only)](https://daooshee.github.io/BMVC2018website/): Both training and evaluation sets are used for evaluation in the main paper.
 
 Unzip all downloaded datasets to data_root folder to match with the following data structure.
 ```
@@ -108,3 +109,6 @@ python main.py --config configs/lol.yaml --pipeline test --checkpoint ../pretrai
 ```
 ## Acknowledgements
 The image enhancement model is built upon [MobileNetV3_PyTorch](https://github.com/PengBoXiangShang/MobileNetV3_PyTorch). We thank the authors for providing helpful functions in our work.
+
+## Contacts
+If you have any questions or suggestions about this repo, please feel free to contact me (nthue189@gmail.com).
