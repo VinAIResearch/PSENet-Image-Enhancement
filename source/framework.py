@@ -46,11 +46,13 @@ class PSENet(LightningModule):
 
     def generate_pseudo_gt(self, im):
         bs, ch, h, w = im.shape
-        underexposed_ranges = torch.linspace(0, self.gamma_upper, steps=self.number_refs)
+        underexposed_ranges = torch.linspace(0, self.gamma_upper, steps=self.number_refs + 1).to(im.device)[:-1]
+        step_size = self.gamma_upper / self.number_refs
         underexposed_gamma = torch.exp(
-            torch.rand([bs, self.number_refs], device=im.device) * underexposed_ranges[None, :]
+            torch.rand([bs, self.number_refs], device=im.device) * step_size + underexposed_ranges[None, :]
         )
-        overrexposed_ranges = torch.linspace(self.gamma_lower, 0, steps=self.number_refs)
+        overrexposed_ranges = torch.linspace(self.gamma_lower, 0, steps=self.number_refs + 1).to(im.device)[:-1]
+        step_size = - self.gamma_lower / self.number_refs
         overrexposed_gamma = torch.exp(
             torch.rand([bs, self.number_refs], device=im.device) * overrexposed_ranges[None, :]
         )
@@ -62,9 +64,7 @@ class PSENet(LightningModule):
         nref = references.shape[1]
         scores = self.iqa(references.view(bs * nref, ch, h, w))
         scores = scores.view(bs, nref, 1, h, w)
-        print("DEBUG")
         max_idx = torch.argmax(scores, dim=1)
-        print("DEBUG", max_idx.shape)
         max_idx = max_idx.repeat(1, ch, 1, 1)[:, None]
         pseudo_gt = torch.gather(references, 1, max_idx)
         return pseudo_gt.squeeze(1)
@@ -76,7 +76,7 @@ class PSENet(LightningModule):
         # saving n-th input and n-th pseudo gt
         nth_input = batch
         nth_pseudo_gt = self.generate_pseudo_gt(batch)
-        if self.saved_input:
+        if self.saved_input is not None:
             # getting (n - 1)th input and (n - 1)-th pseudo gt -> calculate loss -> update model weight (handeled automatically by pytorch lightning)
             im = self.saved_input
             pred_im, pred_gamma = self.model(im)
